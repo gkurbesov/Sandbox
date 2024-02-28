@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
+        <PackageReference Include="Swashbuckle.AspNetCore"/>
+        <PackageReference Include="HotChocolate.AspNetCore"/>
+        <PackageReference Include="HotChocolate.Execution"/>
+        <PackageReference Include="HotChocolate.Types.Scalars"/>
+    </ItemGroup>
+
+</Project>

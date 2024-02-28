@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Graphql", "Sandbox.Graphql\Sandbox.Graphql.csproj", "{0219D3BA-2820-49A2-9CA1-A7775BCB1275}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{D5B643BC-D354-4148-8E3F-11EA0E15E17C}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Packages.props = Directory.Packages.props
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Console", "Sandbox.Console\Sandbox.Console.csproj", "{61F79A0E-743D-43BF-88AE-F453CC82E8AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{246881DB-FA36-4C11-9118-E8EDE649F88F}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.EfCore", "Sandbox.EfCore\Sandbox.EfCore.csproj", "{4E7ED0EC-A2D8-4FB4-B5DA-09BCE6D67797}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Kafka", "Sandbox.Kafka\Sandbox.Kafka.csproj", "{2E9D0B99-900A-4A91-A99A-8BF962B66FFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Configuration", "Sandbox.Configuration\Sandbox.Configuration.csproj", "{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0219D3BA-2820-49A2-9CA1-A7775BCB1275}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0219D3BA-2820-49A2-9CA1-A7775BCB1275}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0219D3BA-2820-49A2-9CA1-A7775BCB1275}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0219D3BA-2820-49A2-9CA1-A7775BCB1275}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F79A0E-743D-43BF-88AE-F453CC82E8AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F79A0E-743D-43BF-88AE-F453CC82E8AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F79A0E-743D-43BF-88AE-F453CC82E8AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F79A0E-743D-43BF-88AE-F453CC82E8AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E7ED0EC-A2D8-4FB4-B5DA-09BCE6D67797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7ED0EC-A2D8-4FB4-B5DA-09BCE6D67797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7ED0EC-A2D8-4FB4-B5DA-09BCE6D67797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7ED0EC-A2D8-4FB4-B5DA-09BCE6D67797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E9D0B99-900A-4A91-A99A-8BF962B66FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E9D0B99-900A-4A91-A99A-8BF962B66FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E9D0B99-900A-4A91-A99A-8BF962B66FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E9D0B99-900A-4A91-A99A-8BF962B66FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

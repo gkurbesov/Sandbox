@@ -1,0 +1,16 @@
+{
+  "Tenants": {
+    "Test": {
+      "Application": {
+        "ProjectId": 1,
+        "SystemName": "Test"
+      }
+    },
+    "Standard": {
+      "Application": {
+        "ProjectId": 2,
+        "SystemName": "Standard"
+      }
+    }
+  }
+}
