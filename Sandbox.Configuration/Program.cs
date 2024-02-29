@@ -4,6 +4,12 @@ using Sandbox.Configuration.Multitenancy.Services;
 
 var globalServices = new ServiceCollection();
 
+var builder = new ConfigurationBuilder();
+var mainConfiguration = builder
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+globalServices.AddSingleton<IConfiguration>(mainConfiguration);
 globalServices.AddSingleton<IGlobalServiceResolver>(sp => new GlobalServiceResolver(globalServices, sp));
 globalServices.AddSingleton<ITenantServicesConfigurator, TenantServicesConfigurator>();
 globalServices.AddSingleton<ITenantContainerFactory, TenantContainerFactory>();
@@ -18,7 +24,6 @@ var mainServiceProvider = globalServices.BuildServiceProvider(new ServiceProvide
 var tenantContainerFactory = mainServiceProvider.GetRequiredService<ITenantContainerFactory>();
 
 
-
 var testTenant = tenantContainerFactory.GetTenantContainer("Test");
 
 var testService = testTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
@@ -26,7 +31,6 @@ Console.WriteLine(testService.GetStateValue());
 
 var globalServiceForTest = testTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
 Console.WriteLine($"{testTenant.TenantId}: " + globalServiceForTest.GetGlobalValue() + "\r\r\r\n");
-
 
 
 var stagingTenant = tenantContainerFactory.GetTenantContainer("Staging");
@@ -37,6 +41,16 @@ Console.WriteLine(stagingService.GetStateValue());
 var globalServiceForStaging = stagingTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
 Console.WriteLine($"{stagingTenant.TenantId}: " + globalServiceForStaging.GetGlobalValue());
 
+Console.WriteLine("\r\n\r\n");
+
+var testPrinter = testTenant.GetTenantProvider().GetRequiredService<ITenantOptionsPrinter>();
+testPrinter.PrintOptions();
+
+
+Console.WriteLine("\r\n\r\n");
+
+var stagingPrinter = stagingTenant.GetTenantProvider().GetRequiredService<ITenantOptionsPrinter>();
+stagingPrinter.PrintOptions();
 
 
 /*

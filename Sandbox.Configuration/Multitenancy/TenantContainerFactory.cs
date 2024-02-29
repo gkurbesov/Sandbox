@@ -1,4 +1,6 @@
-﻿namespace Sandbox.Configuration.Multitenancy;
+﻿using Sandbox.Configuration.JsonTenantedConfiguration;
+
+namespace Sandbox.Configuration.Multitenancy;
 
 public interface ITenantContainerFactory
 {
@@ -7,7 +9,8 @@ public interface ITenantContainerFactory
 
 public class TenantContainerFactory(
     IGlobalServiceResolver globalServiceResolver,
-    ITenantServicesConfigurator servicesConfigurator)
+    ITenantServicesConfigurator servicesConfigurator,
+    IConfiguration mainConfiguration)
     : ITenantContainerFactory
 {
     private readonly Dictionary<string, ITenantContainer> _tenantContainers = new();
@@ -18,10 +21,26 @@ public class TenantContainerFactory(
         {
             tenantContainer = new TenantContainer(tenantId);
             tenantContainer.SetGlobalServices(globalServiceResolver);
-            servicesConfigurator.ConfigureService(tenantContainer.GetTenantServices());
+
+            var services = tenantContainer.GetTenantServices();
+            var tenantConfiguration = CreateTenantConfiguration(services, tenantId);
+            services.AddSingleton(tenantConfiguration);
+
+            servicesConfigurator.ConfigureService(services, tenantConfiguration);
+
             _tenantContainers[tenantId] = tenantContainer;
         }
 
         return tenantContainer;
+    }
+
+    private IConfiguration CreateTenantConfiguration(IServiceCollection services, string tenantId)
+    {
+        var tenantConfiguration = new ConfigurationBuilder()
+            .AddConfiguration(mainConfiguration)
+            .AddTenantedJsonFile("tenants.appsettings.json", tenantId)
+            .Build();
+
+        return tenantConfiguration;
     }
 }
