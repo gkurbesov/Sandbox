@@ -23,34 +23,25 @@ var mainServiceProvider = globalServices.BuildServiceProvider(new ServiceProvide
 
 var tenantContainerFactory = mainServiceProvider.GetRequiredService<ITenantContainerFactory>();
 
-
-var testTenant = tenantContainerFactory.GetTenantContainer("Test");
-
-var testService = testTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
-Console.WriteLine(testService.GetStateValue());
-
-var globalServiceForTest = testTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
-Console.WriteLine($"{testTenant.TenantId}: " + globalServiceForTest.GetGlobalValue() + "\r\r\r\n");
+ExampleForTenant(tenantContainerFactory, "Test");
+ExampleForTenant(tenantContainerFactory, "Staging");
 
 
-var stagingTenant = tenantContainerFactory.GetTenantContainer("Staging");
-var stagingService = stagingTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
-Console.WriteLine(stagingService.GetStateValue());
+void ExampleForTenant(ITenantContainerFactory tenantContainerFactory, string tenantId)
+{
+    var tenantContainer = tenantContainerFactory.GetTenantContainer(tenantId);
 
-var globalServiceForStaging = stagingTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
-Console.WriteLine($"{stagingTenant.TenantId}: " + globalServiceForStaging.GetGlobalValue());
+    var tenantedService = tenantContainer.GetTenantProvider().GetRequiredService<ITenantedService>();
+    Console.WriteLine(tenantedService.GetStateValue());
 
-Console.WriteLine("\r\n\r\n");
-
-var testPrinter = testTenant.GetTenantProvider().GetRequiredService<ITenantOptionsPrinter>();
-testPrinter.PrintOptions();
-
-
-Console.WriteLine("\r\n\r\n");
-
-var stagingPrinter = stagingTenant.GetTenantProvider().GetRequiredService<ITenantOptionsPrinter>();
-stagingPrinter.PrintOptions();
-
+    var globalServiceForTenant = tenantContainer.GetTenantProvider().GetRequiredService<IGlobalService>();
+    Console.WriteLine($"{tenantContainer.TenantId}: {globalServiceForTenant.GetGlobalValue()}");
+    
+    var tenantOptionsPrinter = tenantContainer.GetTenantProvider().GetRequiredService<ITenantOptionsPrinter>();
+    tenantOptionsPrinter.PrintOptions();
+    
+    Console.WriteLine("\r\n\r\n");
+}
 
 /*
 IHost host = Host.CreateDefaultBuilder(args)
