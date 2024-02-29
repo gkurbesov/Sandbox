@@ -1,8 +1,41 @@
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Sandbox.Configuration;
-using Sandbox.Configuration.JsonTenantedConfiguration;
 using Sandbox.Configuration.Multitenancy;
 using Sandbox.Configuration.Multitenancy.Services;
+
+
+var globalServices = new ServiceCollection();
+
+globalServices.AddSingleton<IGlobalService, GlobalService>();
+globalServices.AddSingleton<ITenantContainerFactory>(sp =>
+    new TenantContainerFactory(globalServices, sp, new TenantServicesConfigurator()));
+
+var mainServiceProvider = globalServices.BuildServiceProvider(new ServiceProviderOptions
+{
+    ValidateScopes = true,
+    ValidateOnBuild = true
+});
+var tenantContainerFactory = mainServiceProvider.GetRequiredService<ITenantContainerFactory>();
+
+
+
+var testTenant = tenantContainerFactory.GetTenantContainer("Test");
+
+var testService = testTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
+Console.WriteLine(testService.GetStateValue());
+
+var globalServiceForTest = testTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
+Console.WriteLine($"{testTenant.TenantId}: " + globalServiceForTest.GetGlobalValue() + "\r\r\r\n");
+
+
+
+var stagingTenant = tenantContainerFactory.GetTenantContainer("Staging");
+
+var stagingService = stagingTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
+Console.WriteLine(stagingService.GetStateValue());
+
+var globalServiceForStaging = stagingTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
+Console.WriteLine($"{stagingTenant.TenantId}: " + globalServiceForStaging.GetGlobalValue());
+
+
 
 /*
 IHost host = Host.CreateDefaultBuilder(args)
@@ -47,37 +80,3 @@ void ShowApplicationInfo(ApplicationOptions options)
     Console.WriteLine($"Deployment: {options.Deployment}");
 }
 */
-
-var globalServices = new ServiceCollection();
-
-globalServices.AddSingleton<IGlobalService, GlobalService>();
-globalServices.AddSingleton<ITenantContainerFactory>(sp =>
-    new TenantContainerFactory(globalServices, sp, new TenantServicesConfigurator()));
-
-var mainServiceProvider = globalServices.BuildServiceProvider(new ServiceProviderOptions
-{
-    ValidateScopes = true,
-    ValidateOnBuild = true
-});
-var tenantContainerFactory = mainServiceProvider.GetRequiredService<ITenantContainerFactory>();
-
-
-
-var testTenant = tenantContainerFactory.GetTenantContainer("Test");
-
-var testService = testTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
-Console.WriteLine(testService.GetStateValue());
-
-var globalservoceForTest = testTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
-Console.WriteLine($"{testTenant.TenantId}: " + globalservoceForTest.GetGlobalValue() + "\r\r\r\n");
-
-
-
-var stagingTenant = tenantContainerFactory.GetTenantContainer("Staging");
-
-var stagingService = stagingTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
-Console.WriteLine(stagingService.GetStateValue());
-
-var globalservoceForStaging = stagingTenant.GetTenantProvider().GetRequiredService<IGlobalService>();
-Console.WriteLine($"{stagingTenant.TenantId}: " + globalservoceForStaging.GetGlobalValue());
-
