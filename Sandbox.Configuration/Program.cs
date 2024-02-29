@@ -34,7 +34,6 @@ Console.WriteLine($"{testTenant.TenantId}: " + globalServiceForTest.GetGlobalVal
 
 
 var stagingTenant = tenantContainerFactory.GetTenantContainer("Staging");
-
 var stagingService = stagingTenant.GetTenantProvider().GetRequiredService<ITenantedService>();
 Console.WriteLine(stagingService.GetStateValue());
 
