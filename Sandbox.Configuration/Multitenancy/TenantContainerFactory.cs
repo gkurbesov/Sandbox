@@ -17,19 +17,19 @@ public class TenantContainerFactory(
 
     public ITenantContainer GetOrCreateTenantContainer(string tenantId)
     {
-        if (!_tenantContainers.TryGetValue(tenantId, out var tenantContainer))
-        {
-            tenantContainer = new TenantContainer(tenantId);
-            tenantContainer.SetGlobalServices(globalServiceResolver);
+        if (_tenantContainers.TryGetValue(tenantId, out var tenantContainer))
+            return tenantContainer;
 
-            var services = tenantContainer.GetTenantServices();
-            var tenantConfiguration = CreateTenantConfiguration(tenantId);
-            services.AddSingleton(tenantConfiguration);
+        tenantContainer = new TenantContainer(tenantId);
+        tenantContainer.SetGlobalServices(globalServiceResolver);
 
-            servicesConfigurator.ConfigureService(services, tenantConfiguration);
+        var services = tenantContainer.GetTenantServices();
+        var tenantConfiguration = CreateTenantConfiguration(tenantId);
+        services.AddSingleton(tenantConfiguration);
 
-            _tenantContainers[tenantId] = tenantContainer;
-        }
+        servicesConfigurator.ConfigureService(services, tenantConfiguration);
+
+        _tenantContainers[tenantId] = tenantContainer;
 
         return tenantContainer;
     }
