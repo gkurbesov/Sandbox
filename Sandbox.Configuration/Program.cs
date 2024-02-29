@@ -4,15 +4,17 @@ using Sandbox.Configuration.Multitenancy.Services;
 
 var globalServices = new ServiceCollection();
 
+globalServices.AddSingleton<IGlobalServiceResolver>(sp => new GlobalServiceResolver(globalServices, sp));
+globalServices.AddSingleton<ITenantServicesConfigurator, TenantServicesConfigurator>();
+globalServices.AddSingleton<ITenantContainerFactory, TenantContainerFactory>();
 globalServices.AddSingleton<IGlobalService, GlobalService>();
-globalServices.AddSingleton<ITenantContainerFactory>(sp =>
-    new TenantContainerFactory(globalServices, sp, new TenantServicesConfigurator()));
 
 var mainServiceProvider = globalServices.BuildServiceProvider(new ServiceProviderOptions
 {
     ValidateScopes = true,
     ValidateOnBuild = true
 });
+
 var tenantContainerFactory = mainServiceProvider.GetRequiredService<ITenantContainerFactory>();
 
 

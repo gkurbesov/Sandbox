@@ -4,7 +4,7 @@ public interface ITenantContainer
 {
     string TenantId { get; }
 
-    void SetGlobalServices(IServiceCollection globalServices, IServiceProvider globalServiceProvider);
+    void SetGlobalServices(IGlobalServiceResolver globalServiceResolver);
 
     IServiceCollection GetTenantServices();
 
@@ -17,7 +17,7 @@ public class TenantContainer(string tenantId) : ITenantContainer
     private IServiceCollection? _services;
     private IServiceProvider? _tenantProvider;
 
-    public void SetGlobalServices(IServiceCollection globalServices, IServiceProvider globalServiceProvider)
+    public void SetGlobalServices(IGlobalServiceResolver globalServiceResolver)
     {
         if (_services != null)
         {
@@ -26,11 +26,11 @@ public class TenantContainer(string tenantId) : ITenantContainer
 
         _services = new ServiceCollection();
         _services.AddSingleton<ITenantProvider>(new TenantProvider(tenantId));
-        foreach (var globalService in globalServices)
+        foreach (var globalService in globalServiceResolver.GetGlobalServices())
         {
             _services.Add(new ServiceDescriptor(
                 globalService.ServiceType,
-                _ => globalServiceProvider.GetRequiredService(globalService.ServiceType), globalService.Lifetime));
+                _ => globalServiceResolver.GetRequiredService(globalService.ServiceType), globalService.Lifetime));
         }
     }
 

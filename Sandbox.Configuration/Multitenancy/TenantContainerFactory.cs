@@ -6,8 +6,7 @@ public interface ITenantContainerFactory
 }
 
 public class TenantContainerFactory(
-    ServiceCollection globalServices,
-    IServiceProvider globalServiceProvider,
+    IGlobalServiceResolver globalServiceResolver,
     ITenantServicesConfigurator servicesConfigurator)
     : ITenantContainerFactory
 {
@@ -18,7 +17,7 @@ public class TenantContainerFactory(
         if (!_tenantContainers.TryGetValue(tenantId, out var tenantContainer))
         {
             tenantContainer = new TenantContainer(tenantId);
-            tenantContainer.SetGlobalServices(globalServices, globalServiceProvider);
+            tenantContainer.SetGlobalServices(globalServiceResolver);
             servicesConfigurator.ConfigureService(tenantContainer.GetTenantServices());
             _tenantContainers[tenantId] = tenantContainer;
         }
