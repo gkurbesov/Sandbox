@@ -23,7 +23,7 @@ public class TenantContainerFactory(
             tenantContainer.SetGlobalServices(globalServiceResolver);
 
             var services = tenantContainer.GetTenantServices();
-            var tenantConfiguration = CreateTenantConfiguration(services, tenantId);
+            var tenantConfiguration = CreateTenantConfiguration(tenantId);
             services.AddSingleton(tenantConfiguration);
 
             servicesConfigurator.ConfigureService(services, tenantConfiguration);
@@ -34,7 +34,7 @@ public class TenantContainerFactory(
         return tenantContainer;
     }
 
-    private IConfiguration CreateTenantConfiguration(IServiceCollection services, string tenantId)
+    private IConfiguration CreateTenantConfiguration(string tenantId)
     {
         var tenantConfiguration = new ConfigurationBuilder()
             .AddConfiguration(mainConfiguration)
