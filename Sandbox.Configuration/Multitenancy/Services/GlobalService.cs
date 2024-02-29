@@ -12,7 +12,7 @@ public class GlobalService : IGlobalService
     public GlobalService()
     {
         Console.ForegroundColor = ConsoleColor.Magenta;
-        Console.WriteLine($"GlobalService created");
+        Console.WriteLine("GlobalService created");
         Console.ResetColor();
     }
 

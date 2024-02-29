@@ -29,7 +29,7 @@ ExampleForTenant(tenantContainerFactory, "Staging");
 
 void ExampleForTenant(ITenantContainerFactory tenantContainerFactory, string tenantId)
 {
-    var tenantContainer = tenantContainerFactory.GetTenantContainer(tenantId);
+    var tenantContainer = tenantContainerFactory.GetOrCreateTenantContainer(tenantId);
 
     var tenantedService = tenantContainer.GetTenantProvider().GetRequiredService<ITenantedService>();
     Console.WriteLine(tenantedService.GetStateValue());

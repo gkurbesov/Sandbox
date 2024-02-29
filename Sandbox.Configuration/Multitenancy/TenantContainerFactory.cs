@@ -4,7 +4,7 @@ namespace Sandbox.Configuration.Multitenancy;
 
 public interface ITenantContainerFactory
 {
-    ITenantContainer GetTenantContainer(string tenantId);
+    ITenantContainer GetOrCreateTenantContainer(string tenantId);
 }
 
 public class TenantContainerFactory(
@@ -15,7 +15,7 @@ public class TenantContainerFactory(
 {
     private readonly Dictionary<string, ITenantContainer> _tenantContainers = new();
 
-    public ITenantContainer GetTenantContainer(string tenantId)
+    public ITenantContainer GetOrCreateTenantContainer(string tenantId)
     {
         if (!_tenantContainers.TryGetValue(tenantId, out var tenantContainer))
         {

@@ -18,5 +18,5 @@ public class TenantedService : ITenantedService
         Console.ResetColor();
     }
 
-    public string GetStateValue() => $"{_tenantProvider.TenantId}: State value for tenant  is {_stateValue}";
+    public string GetStateValue() => $"{_tenantProvider.TenantId}: State value for tenant is {_stateValue}";
 }
