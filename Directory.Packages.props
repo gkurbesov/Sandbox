@@ -1,9 +1,13 @@
 <Project>
   <ItemGroup>
     <PackageVersion Include="Confluent.Kafka" Version="2.3.0" />
+    <PackageVersion Include="Ductus.FluentDocker" Version="2.10.59" />
     <PackageVersion Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.0.2" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="7.0.14" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="7.0.17" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
     <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="7.0.3" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />

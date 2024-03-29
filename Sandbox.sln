@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.EfCore", "Sandbox.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Configuration", "Sandbox.Configuration\Sandbox.Configuration.csproj", "{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Tests", "Sandbox.Tests\Sandbox.Tests.csproj", "{DA2C8618-0CFA-4E18-9FB9-3C7550BA5BC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Library", "Sandbox.Library\Sandbox.Library.csproj", "{B8FED540-EE5D-41F4-8703-273B974496EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,5 +45,13 @@ Global
 		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BE1579C-587B-49CA-B3D3-9779FFFAC1F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2C8618-0CFA-4E18-9FB9-3C7550BA5BC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2C8618-0CFA-4E18-9FB9-3C7550BA5BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2C8618-0CFA-4E18-9FB9-3C7550BA5BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2C8618-0CFA-4E18-9FB9-3C7550BA5BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8FED540-EE5D-41F4-8703-273B974496EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8FED540-EE5D-41F4-8703-273B974496EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8FED540-EE5D-41F4-8703-273B974496EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8FED540-EE5D-41F4-8703-273B974496EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
