@@ -57,7 +57,7 @@ if (-not $FileName)
 }
 
 # Путь к .trx файл
-$trxFile = Get-ChildItem -Recurse -Filter $FileName | ForEach-Object { $_.FullName } | Select-Object -First 1
+$trxFile = Get-ChildItem -Path (Get-Location) -Recurse -Filter $FileName | ForEach-Object { $_.FullName } | Select-Object -First 1
 
 # Проверяем, найден ли файл
 if ($trxFile)
