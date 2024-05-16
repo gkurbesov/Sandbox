@@ -4,7 +4,7 @@ public record ApplicationOptions
 {
     public const string SectionName = "Application";
 
-    public required int ProjectId { get; init; }
-    public required string SystemName { get; init; }
-    public required string Deployment { get; init; }
+    public int? ProjectId { get; init; }
+    public string? SystemName { get; init; }
+    public string? Deployment { get; init; }
 }

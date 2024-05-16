@@ -1,7 +1,10 @@
+#pragma warning disable VSTHRD200
+using Microsoft.Extensions.Options;
+using Sandbox.Configuration;
 using Sandbox.Configuration.Multitenancy;
 using Sandbox.Configuration.Multitenancy.Services;
 
-
+/*
 var globalServices = new ServiceCollection();
 
 var builder = new ConfigurationBuilder();
@@ -21,6 +24,7 @@ var mainServiceProvider = globalServices.BuildServiceProvider(new ServiceProvide
     ValidateOnBuild = true
 });
 
+
 var tenantContainerFactory = mainServiceProvider.GetRequiredService<ITenantContainerFactory>();
 
 ExampleForTenant(tenantContainerFactory, "Test");
@@ -36,24 +40,24 @@ void ExampleForTenant(ITenantContainerFactory tenantContainerFactory, string ten
 
     var globalServiceForTenant = tenantContainer.GetTenantProvider().GetRequiredService<IGlobalService>();
     Console.WriteLine($"{tenantContainer.TenantId}: {globalServiceForTenant.GetGlobalValue()}");
-    
+
     var tenantOptionsPrinter = tenantContainer.GetTenantProvider().GetRequiredService<ITenantOptionsPrinter>();
     tenantOptionsPrinter.PrintOptions();
-    
+
     Console.WriteLine("\r\n\r\n");
 }
-
-/*
+*/
 IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureAppConfiguration(builder =>
+    .ConfigureServices((context, services) =>
     {
-        builder.AddJsonFile("");
+        services.AddOptions<ApplicationOptions>()
+            .Bind(context.Configuration.GetSection(ApplicationOptions.SectionName));
+        services.AddHostedService<Worker>();
     })
-    .ConfigureServices(services => { services.AddHostedService<Worker>(); })
     .Build();
 
 host.Run();
-*/
+
 /*
 var builder = new ConfigurationBuilder();
 
@@ -86,3 +90,4 @@ void ShowApplicationInfo(ApplicationOptions options)
     Console.WriteLine($"Deployment: {options.Deployment}");
 }
 */
+#pragma warning restore VSTHRD200
