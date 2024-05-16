@@ -26,5 +26,4 @@ jobs:
     - name: Publish test result
       shell: pwsh
       run: |
-          $testResults = Get-ChildItem -Recurse -Filter test-results.trx | ForEach-Object { $_.FullName }
-          Write-Host $testResults
+          $testResults = Get-ChildItem -Recurse -Filter test-results.trx | ForEach-Object { $_.FullName } | Write-Host
