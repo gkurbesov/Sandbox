@@ -22,4 +22,26 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --logger:"trx;LogFileName=test-results.trx"
+    - name: Finw file with bash
+      if: always()
+      run: |
+        search_file="test-results.trx"
+        matched_file=$(find . -name "$search_file" -type f)
+
+        # Проверяем, найден ли файл
+        if [ -z "$matched_file" ]; then
+          echo "Файл $search_file не найден."
+        else
+          # Извлекаем имя найденного файла
+          file_name=$(basename "$matched_file")
+
+          # Копируем найденный файл в текущую папку
+          cp "$matched_file" "./result.trx"
+
+          echo "Файл $file_name успешно скопирован в текущую папку."
+        fi
+    - name: Publish test result
+      if: always()
+      shell: pwsh
+      run: ./.github/workflows/collect_test_results.ps1 -FileName 'result.trx'
