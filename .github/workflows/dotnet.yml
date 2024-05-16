@@ -24,6 +24,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger:"trx;LogFileName=test-results.trx"
     - name: Finw file with bash
+      if: always()
       run: |
         search_file="test-results.trx"
         matched_file=$(find . -name "$search_file" -type f)
