@@ -24,5 +24,6 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --logger:"trx;LogFileName=test-results.trx"
     - name: Publish test result
+      if: always()
       shell: pwsh
       run: ./.github/workflows/collect_test_results.ps1 -FileName 'test-results.trx'
